@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -127,22 +127,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="deposit.h" />
-    <ClInclude Include="inventory.h" />
-    <ClInclude Include="product.h" />
+    <ClInclude Include="depozit.h" />
+    <ClInclude Include="produs.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="deposit.cpp" />
-    <ClCompile Include="inventory.cpp" />
+    <ClCompile Include="depozit.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="product.cpp" />
+    <ClCompile Include="produs.cpp" />
     <ClCompile Include="user.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="deposit.csv" />
-    <None Include="Depozit_Central.csv" />
-    <None Include="Depozit_Raureni.csv" />
+    <None Include="depozit.csv" />
+    <None Include="Prodese.csv" />
     <None Include="user.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -12,9 +13,10 @@ public:
 	int get_quantity();
 	void set_price(float new_price);
 	void set_quantity(int new_quantity);
-	static void editing_the_product_price(string deposit_name, string name, float new_price);
-	static void editing_the_product_quantity(string deposit_name, string name, int new_quantity);
-	static void delete_product(string deposit_name, string name);
+	static void editing_the_product_price(string name, float new_price, vector<Product>& products);
+	static void editing_the_product_quantity(string name, int new_quantity, vector<Product>& products);
+	static void delete_product(string name, vector<Product>& products);
+
 private:
 	string name;
 	float price;

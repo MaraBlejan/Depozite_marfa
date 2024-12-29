@@ -7,6 +7,8 @@
 #include <vector>
 #include <cmath>
 #include <iomanip>
+#include "deposit.h"
+#include<algorithm>
 
 Product::Product(string name, float price, int quantity)
 {
@@ -36,195 +38,53 @@ void Product::set_quantity(int new_quantity)
 	this->quantity = new_quantity;
 }
 
-void Product::editing_the_product_price(string deposit_name, string name, float new_price)
+void Product::editing_the_product_price(string name, float new_price, vector<Product>& products)
 {
-	vector<Product>products;
-	bool found = false;
-	for (int i = 0; i < deposit_name.size(); i++)
+	for (auto& product : products)
 	{
-		if (deposit_name[i] == ' ')
+		if (name == product.get_name())
 		{
-			deposit_name[i] = '_';
-		}
-	}
-	ifstream file(deposit_name + ".csv");
-	if (!file.is_open())
-	{
-		cout << "The file could not be opened!" << endl;
-	}
-	else
-	{
-		string line;
-		string name_product;
-		string price;
-		string quantity;
-		getline(file, line);
+			product.set_price(new_price);
+			cout << "Product edited!" << endl;
 
-		while (getline(file, line))
-		{
-			stringstream ss(line);
-			getline(ss, name_product, ',');
-			getline(ss, price, ',');
-			getline(ss, quantity, ',');
+			return;
+		}
+	}
+	cout << "Product not found!" << endl;
+}
 
-			Product product(name_product, stof(price), stoi(quantity));
-			if (product.get_name() == name)
-			{
-				product.set_price(new_price);
-				products.emplace_back(product);
-				cout << "\nThe price was edited!\n" << endl;
-				found = true;
-			}
-			else
-			{
-				products.emplace_back(product);
-			}
-		}
-	}
-	if (found == false)
+void Product::editing_the_product_quantity(string name, int new_quantity, vector<Product>& products)
+{
+	for (auto& product : products)
 	{
-		cout << "\nProduct not found!\n" << endl;
-	}
-	else
-	{
-		ofstream file(deposit_name + ".csv");
-		if (!file.is_open())
+		if (name == product.get_name())
 		{
-			cout << "The file could not be opened!" << endl;
-		}
-		else
-		{
-			file << "name,price,quantity\n";
-			for (Product product : products)
-			{
-				file << product.get_name() << "," << fixed << setprecision(2) << product.get_price() << ", " << product.get_quantity() << "\n";
-			}
+			product.set_quantity(new_quantity);
+			cout << "Product edited!\n" << endl;
+
+			return;
 		}
 	}
 }
-void Product::editing_the_product_quantity(string deposit_name, string name, int new_quantity)
+
+void Product::delete_product(string name, vector<Product>& products)
 {
-	vector<Product>products;
-	bool found = false;
-	for (int i = 0; i < deposit_name.size(); i++)
+	int index = -1;
+	for (int i = 0; i < products.size(); i++)
 	{
-		if (deposit_name[i] == ' ')
+		if (name == products[i].get_name())
 		{
-			deposit_name[i] = '_';
+			index = i;
+			break;
 		}
 	}
-	ifstream file(deposit_name + ".csv");
-	if (!file.is_open())
+	if (index == -1)
 	{
-		cout << "The file could not be opened!" << endl;
+		cout << "The product was not found!" << endl;
 	}
 	else
 	{
-		string line;
-		string name_product;
-		string price;
-		string quantity;
-		getline(file, line);
-		while (getline(file, line))
-		{
-			stringstream ss(line);
-			getline(ss, name_product, ',');
-			getline(ss, price, ',');
-			getline(ss, quantity, ',');
-			Product product(name_product, stof(price), stoi(quantity));
-			if (product.get_name() == name)
-			{
-				product.set_quantity(new_quantity);
-				products.emplace_back(product);
-				found = true;
-				cout << "The quantity was edited!\n" << endl;
-			}
-			else
-			{
-				products.emplace_back(product);
-			}
-		}
-		if (found == false)
-		{
-			cout << "\nProduct not found!\n" << endl;
-		}
-		else
-		{
-			ofstream file(deposit_name + ".csv");
-			if (!file.is_open())
-			{
-				cout << "The file could not be opened!" << endl;
-			}
-			else
-			{
-				file << "name,price,quantity\n";
-				for (Product product : products)
-				{
-					file << product.get_name() << "," << fixed << setprecision(2) << product.get_price() << ", " << product.get_quantity() << "\n";
-				}
-			}
-		}
-	}
-}
-void Product::delete_product(string deposit_name, string name)
-{
-	vector<Product>products;
-	bool found = false;
-	for (int i = 0; i < deposit_name.size(); i++)
-	{
-		if (deposit_name[i] == ' ')
-		{
-			deposit_name[i] = '_';
-		}
-	}
-	ifstream file(deposit_name + ".csv");
-	if (!file.is_open())
-	{
-		cout << "The file could not be opened!" << endl;
-	}
-	else
-	{
-		string line;
-		string name_product;
-		string price;
-		string quantity;
-		getline(file, line);
-		while (getline(file, line))
-		{
-			stringstream ss(line);
-			getline(ss, name_product, ',');
-			getline(ss, price, ',');
-			getline(ss, quantity, ',');
-			Product product(name_product, stof(price), stoi(quantity));
-			if (product.get_name() == name)
-			{
-				found = true;
-			}
-			else
-			{
-				products.emplace_back(product);
-			}
-		}
-		if (found)
-		{
-			cout << "\nProduct deleted!\n" << endl;
-		}
-		else
-		{
-			cout << "\nProduct not found!\n" << endl;
-		}
-		ofstream file(deposit_name + ".csv");
-		if (!file.is_open())
-		{
-			cout << "The file could not be opened!" << endl;
-		}
-		else
-		{
-			file << "name,price,quantity\n";
-			for (Product product : products)
-			{
-				file << product.get_name() << "," << fixed << setprecision(2) << product.get_price() << ", " << product.get_quantity() << "\n";
-			}
-		}
+		products.erase(products.begin() + index);
+		cout << "The product was deleted successuly! " << endl;
 	}
 }

@@ -1,12 +1,14 @@
 #pragma once
 #include <string>
+#include <vector>
+#include "product.h"
 
 using namespace std;
 
 class Inventory
 {
 public:
-	static void add_product(string deposit_name, string name, float price, int quantity);
-	static void print_inventory(string deposit_name);
-	static void check_stock(string deposit_name);
+	static void add_product(string name, float price, int quantity, vector<Product>& products);
+	static void print_inventory(vector<Product>& products);
+	static void check_stock(vector<Product>& products);
 };

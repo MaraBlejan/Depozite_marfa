@@ -127,12 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="app.h" />
     <ClInclude Include="deposit.h" />
     <ClInclude Include="inventory.h" />
     <ClInclude Include="product.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="app.cpp" />
     <ClCompile Include="deposit.cpp" />
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="main.cpp" />
@@ -141,7 +143,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="deposit.csv" />
-    <None Include="Depozit_Central.csv" />
     <None Include="Depozit_Raureni.csv" />
     <None Include="user.csv" />
   </ItemGroup>

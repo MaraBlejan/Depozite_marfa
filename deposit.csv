@@ -1,3 +1,2 @@
-name,address
-Depozit Central,Str. dd
-Depozit Raureni,Str. 2343
+name,address,file
+Depozit Raureni,Str. ana,Depozit_Raureni.csv
